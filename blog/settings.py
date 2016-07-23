@@ -11,11 +11,20 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-
+import mongoengine
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DBNAME = 'blog'
+_MONGODB_USER = 'mongouser'
+_MONGODB_PASSWD = 'password'
+_MONGODB_HOST = 'thehost'
+_MONGODB_NAME = 'thedb'
+_MONGODB_DATABASE_HOST = \
+    'mongodb://%s:%s@%s/%s' \
+    % (_MONGODB_USER, _MONGODB_PASSWD, _MONGODB_HOST, _MONGODB_NAME)
+
+mongoengine.connect(DBNAME, host=_MONGODB_DATABASE_HOST)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -78,8 +87,8 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': '',
+        'NAME': '',
     }
 }
 
